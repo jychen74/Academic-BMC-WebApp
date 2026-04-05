@@ -25,9 +25,10 @@
 ### 步驟一：建立資料庫與程式碼 (一鍵複製)
 
 1. 點擊下方連結，會自動將內建程式碼的資料庫範本複製到你的 Google 雲端硬碟 (全程免費)：
-   👉 https://docs.google.com/spreadsheets/d/1Yq950ENt2-s_izRgoKpXPe52krSh2_m0UXLvmiLSBp4/copy
-2. 複製完成後，你可以隨意修改試算表中 **C 欄 (Title)** 的標題文字，打造你專屬的畫布欄位。
-3. 在這邊不用編輯 **B欄 (content)** 的內容，我們等步驟三發佈後，直接在網頁上填寫。
+   👉 https://docs.google.com/spreadsheets/d/1ZLwbtcXO2Koy5OcWiN7oZbaF0rReSUskVKp73Zv-StE/copy
+2. ![clone sheet](figs/clone_sheet.png)
+4. 複製完成後，你可以隨意修改試算表中 **C 欄 (Title)** 的標題文字，打造你專屬的畫布欄位。
+5. 在這邊不用編輯 **B欄 (content)** 的內容，我們等步驟三發佈後，直接在網頁上填寫。
 
 ### 步驟二：發布網頁應用程式
 
