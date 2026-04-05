@@ -1,175 +1,168 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <base target="_top">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic BMC & SWOT Web App</title>
     <style>
-      body { font-family: "微軟正黑體", sans-serif; background: #f4f4f9; padding: 20px; }
-      
-      .tab { overflow: hidden; border-bottom: 2px solid #ccc; margin-bottom: 15px; }
-      .tab button { background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 24px; font-size: 18px; font-weight: bold; border-radius: 8px 8px 0 0; color: #666; }
-      .tab button:hover { background-color: #ddd; }
-      .tab button.active { background-color: #007bff; color: white; }
-      .tabcontent { display: none; }
-
-      .export-bar { background: #e9ecef; padding: 12px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;}
-      .export-bar button { padding: 8px 12px; cursor: pointer; border: 1px solid #ccc; border-radius: 5px; background: white; font-weight: bold; color: #333;}
-      .export-bar button:hover { background: #d4edda; border-color: #28a745;}
-      .btn-sponsor { background: #FFDD00 !important; border-color: #f6c800 !important; }
-
-      .bmc-grid { display: grid; grid-template-columns: repeat(10, 1fr); grid-auto-rows: minmax(150px, auto); gap: 15px; max-width: 1400px; margin: 0 auto; }
-      .swot-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: minmax(250px, auto); gap: 20px; max-width: 1000px; margin: 0 auto; }
-      
-      .box { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column;}
-      h3 { margin-top: 0; color: #333; font-size: 16px; border-bottom: 2px solid #007bff; padding-bottom: 5px;}
-      .content { flex-grow: 1; outline: none; white-space: pre-wrap; line-height: 1.5; font-size: 15px;}
-      .content:focus { background: #fffde7; }
-      #status { position: fixed; bottom: 20px; right: 20px; background: #4CAF50; color: white; padding: 10px; border-radius: 5px; display: none; z-index: 1000;}
-
-      #box-kp { grid-column: 1 / 3; grid-row: 1 / 3; } #box-ka { grid-column: 3 / 5; grid-row: 1 / 2; }
-      #box-kr { grid-column: 3 / 5; grid-row: 2 / 3; } #box-vp { grid-column: 5 / 7; grid-row: 1 / 3; }
-      #box-cr { grid-column: 7 / 9; grid-row: 1 / 2; } #box-ch { grid-column: 7 / 9; grid-row: 2 / 3; }
-      #box-cs { grid-column: 9 / 11; grid-row: 1 / 3; }
-      #box-cs_cost { grid-column: 1 / 6; grid-row: 3 / 4; min-height: 120px; }
-      #box-rs { grid-column: 6 / 11; grid-row: 3 / 4; min-height: 120px; }
-      #box-swot_s h3 { border-color: #28a745; color: #28a745; } #box-swot_w h3 { border-color: #dc3545; color: #dc3545; }
-      #box-swot_o h3 { border-color: #17a2b8; color: #17a2b8; } #box-swot_t h3 { border-color: #ffc107; color: #d39e00; }
-
-      @media print {
-        body { background: white; padding: 0; }
-        .tab, .export-bar, #status { display: none !important; }
-        .box { box-shadow: none; border: 2px solid #000; break-inside: avoid;}
-        .bmc-grid, .swot-grid { display: grid !important; gap: 10px; }
-      }
+        :root {
+            --primary: #007bff;
+            --bg: #f4f4f9;
+            --text: #333;
+        }
+        body {
+            font-family: "微軟正黑體", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 { color: #2c3e50; border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-top: 0;}
+        h2 { color: #34495e; margin-top: 40px; border-left: 5px solid var(--primary); padding-left: 10px;}
+        h3 { color: #007bff; }
+        .badge {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #495057;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+        .step-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .step-box h3 { margin-top: 0; color: #2c3e50;}
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+            box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+        }
+        .btn:hover { background: #0056b3; }
+        .sponsor-btn {
+            background: #FFDD00;
+            color: #333;
+            border: 1px solid #f6c800;
+            box-shadow: 0 2px 4px rgba(246,200,0,0.3);
+        }
+        .sponsor-btn:hover { background: #e6c800; }
+        .disclaimer {
+            font-size: 0.85em;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        code {
+            background: #f1f1f1;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #d63384;
+            font-family: Consolas, monospace;
+        }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 10px; }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+    <div class="container">
+        <h1>輕量級學術與營運策略畫布 <br>
+            <span style="font-size: 0.55em; color: #666; font-weight: normal;">Academic BMC & SWOT Web App</span>
+        </h1>
+        <p>這是一個利用 <strong>Google Sheets</strong> 作為資料庫、透過 <strong>Google Apps Script (GAS)</strong> 部署的輕量級網頁應用程式。專為需要頻繁調整專案策略、管理核心設施或實驗室營運的研究人員設計。</p>
+        
+        <div>
+            <span class="badge">✅ 免架設伺服器</span>
+            <span class="badge">✅ 直覺修改</span>
+            <span class="badge">✅ 完全自訂標題</span>
+            <span class="badge">✅ 學術友善匯出</span>
+        </div>
 
-    <div class="tab">
-      <button class="tablinks active" onclick="openTab(event, 'Tab_BMC')">商業模式畫布 (BMC)</button>
-      <button class="tablinks" onclick="openTab(event, 'Tab_SWOT')">SWOT 分析</button>
+        <h2>🚀 圖文並茂部署教學 (1 分鐘完成，保證成功)</h2>
+        
+        <div class="step-box">
+            <h3>步驟一：建立資料庫與程式碼 (一鍵複製)</h3>
+            <p>點擊下方按鈕，將內建程式碼的資料庫範本複製到你的 Google 雲端硬碟：</p>
+            <a href="https://docs.google.com/spreadsheets/d/1ZLwbtcXO2Koy5OcWiN7oZbaF0rReSUskVKp73Zv-StE/copy" target="_blank" class="btn">📥 一鍵複製 Google Sheet 專屬範本</a>
+            <img src="figs/clone_sheet.webp" style="width: 80%; border-radius: 10%;">
+            <p style="font-size: 0.9em; margin-top: 15px; color: #555;">💡 複製完成後，你可以隨意修改試算表中 <strong>C 欄 (Title)</strong> 的標題文字，打造你專屬的畫布欄位。</p>
+            <p style="font-size: 0.9em; margin-top: 15px; color: #555;">💡 在這邊不用編輯 <strong>B欄 (content)</strong> 的內容，我們等步驟三發佈後，直接在網頁上填寫。</p>
+            <img src="figs/gsheet.webp" style="width: 80%; border-radius: 10%;">
+        </div>
+
+        <div class="step-box">
+            <h3>步驟二：發布網頁應用程式 (完整圖文教學)</h3>
+            <ol>
+                <li>在複製好的試算表上方選單，點擊 <strong>「擴充功能」 > 「Apps Script」</strong>。你會看到程式碼已經由範本自動為你準備好了！<br>  
+                <img src="figs/gas.webp" alt="Apps Script 編輯器" class="tutorial-img" style="width: 50%;"></li>
+                
+                <li>請點擊右上角藍色的 <strong>「部署」 > 「新增部署作業」</strong>。<br>
+                <img src="figs/gas-deploy-1.webp" alt="新增部署作業" class="tutorial-img" style="width: 30%;"></li>
+                
+                <li>點擊左上角的齒輪圖示，選取 <strong>「網頁應用程式」</strong>，並簡單寫個記錄。<br>
+                <img src="figs/gas-deploy-2.webp" alt="選擇網頁應用程式" class="tutorial-img" style="width: 50%;"></li>
+                
+                <li>將 <strong>執行身分</strong> 設為「我」，<strong>誰可以存取</strong> 設為「只有我自己」(這樣才能保護你的資料隱私)，然後點擊 <strong>「部署」</strong>。<br>
+                <img src="figs/deploy-2.webp" alt="部署權限設定" class="tutorial-img" style="width: 50%;"></li>
+                
+                <li><strong>【首次授權教學】</strong>系統會要求授權，請點擊 <strong>「授予存取權」</strong>。<br>
+                <img src="figs/deploy-3.webp" alt="授予存取權" class="tutorial-img" style="width: 50%;"></li>
+                
+                <li>若出現紅色的安全警告，請不用擔心（因為這是你自己部署給自己用的程式碼）。點擊左下角的 <strong>「Advanced (進階)」</strong>。<br>
+                <img src="figs/deploy-4.webp" alt="安全警告處理 - 進階" class="tutorial-img" style="width: 50%;"></li>
+                
+                <li>接著點擊最下方的 <strong>「Go to [專案名稱] (unsafe)」</strong> 繼續。<br>
+                <img src="figs/deploy-5.webp" alt="前往專案" class="tutorial-img" style="width: 50%;"></li>
+                
+                <li>勾選「Select all」允許存取權限，然後點擊 <strong>「Continue (繼續)」</strong>。<br>
+                <img src="figs/deploy-6.webp" alt="允許存取權限" class="tutorial-img" style="width: 50%;"></li>
+                
+                <li>🎉 恭喜！看到這個畫面代表部署成功，請複製下方產生的網址，這就是你專屬的策略畫布連結！<br>
+                <img src="figs/deploy-7.webp" alt="部署成功網址" class="tutorial-img" style="width: 50%;"></li>
+
+                <li>接下來，就可以直接在 web app 上編輯自己的 business model canvas 囉~ <br> <img src="figs/web-app.webp" alt="部署成功網址" class="tutorial-img" style="width: 50%;"></li>
+            </ol>
+        </div>
+
+
+        <h2>❤️ 支持這個專案</h2>
+        <p>如果這個畫布工具幫助你釐清了實驗室的營運方向，或節省了你整理計畫書的時間，歡迎透過以下方式支持我的持續開發與研究：</p>
+
+        <h3>☕ 1. 贊助支持 (Sponsor This Project)</h3>
+        <p>開發與維護開源工具需要投入許多業餘時間。如果你覺得工具好用，歡迎給我一點鼓勵！</p>
+        <a href="https://ko-fi.com/jingyuanchen" target="_blank" class="btn sponsor-btn">☕ 贊助開發者 (Ko-fi)</a>
+
+        <h3>📄 2. 學術引用 (Citation)</h3>
+        <p>身為生醫研究人員，若你在研究或設施管理中使用了本工具，或對單細胞轉錄體 (scRNA-seq)、Nanopore 定序有興趣，歡迎一起討論。</p>
+
+        <div class="disclaimer">
+            <strong>⚠️ 免責聲明 (Disclaimer)</strong><br>
+            <p>
+                <li>本專案為開發者基於個人興趣於非工作時間所開發之開源輔助工具，<strong>與所屬之研究機構或任職單位無關</strong>。</li>
+                <li>專案採「現狀 (as-is)」提供，開發者與所屬機構不承擔系統維護、資料保管或任何直接/間接損害之背書與賠償責任。使用者應自行妥善保管其匯出之資料與策略機密。</li>
+            </p>    
+        </div>
     </div>
-
-    <div class="export-bar">
-      <span>🛠️ 匯出與工具：</span>
-      <button onclick="window.print()">🖨️ 存為 PDF</button>
-      <button onclick="downloadLocal('png')">🖼️ 下載圖檔</button>
-      <button onclick="downloadLocal('qmd')">📄 下載 Quarto (.qmd)</button>
-      <button onclick="nativeShare()">🔗 分享與發送</button>
-      <button class="btn-sponsor" onclick="window.open('https://ko-fi.com/jingyuanchen', '_blank')">☕ 贊助開發者</button>
-    </div>
-
-    <div id="status">提示訊息區</div>
-
-    <div id="Tab_BMC" class="tabcontent" style="display: block;">
-      <div class="bmc-grid" id="bmc-container">資料載入中...</div>
-    </div>
-
-    <div id="Tab_SWOT" class="tabcontent">
-      <div class="swot-grid" id="swot-container">資料載入中...</div>
-    </div>
-
-    <script>
-      google.script.run.withSuccessHandler(renderCanvas).getBmcData();
-
-      function renderCanvas(data) {
-        let bmcHtml = "";
-        ['kp', 'ka', 'kr', 'vp', 'cr', 'ch', 'cs', 'cs_cost', 'rs'].forEach(id => {
-           const title = data[id] ? data[id].title : id;
-           const content = data[id] ? data[id].content : '';
-           bmcHtml += `<div class="box" id="box-${id}"><h3>${title}</h3><div class="content" contenteditable="true" data-id="${id}" onblur="saveData(this)">${content}</div></div>`;
-        });
-        document.getElementById('bmc-container').innerHTML = bmcHtml;
-
-        let swotHtml = "";
-        ['swot_s', 'swot_w', 'swot_o', 'swot_t'].forEach(id => {
-           const title = data[id] ? data[id].title : id;
-           const content = data[id] ? data[id].content : '';
-           swotHtml += `<div class="box" id="box-${id}"><h3>${title}</h3><div class="content" contenteditable="true" data-id="${id}" onblur="saveData(this)">${content}</div></div>`;
-        });
-        document.getElementById('swot-container').innerHTML = swotHtml;
-      }
-
-      function saveData(element) {
-        const id = element.getAttribute('data-id');
-        const text = element.innerText;
-        showStatus('存檔中...', true);
-        google.script.run.withSuccessHandler(() => showStatus('已自動存檔！')).saveBmcData(id, text);
-      }
-
-      function openTab(evt, tabName) {
-        document.querySelectorAll(".tabcontent").forEach(el => el.style.display = "none");
-        document.querySelectorAll(".tablinks").forEach(el => el.className = el.className.replace(" active", ""));
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-      }
-
-      function showStatus(msg, keep = false) {
-        const el = document.getElementById('status');
-        el.innerText = msg;
-        el.style.display = 'block';
-        if (!keep) setTimeout(() => el.style.display = 'none', 3000);
-      }
-
-      function generateQMDString() {
-        let qmd = "---\ntitle: \"策略分析畫布\"\nauthor: \"Generated by Canvas Web App\"\nformat: revealjs\n---\n\n";
-        qmd += "## 商業模式畫布 (BMC)\n\n";
-        ['kp', 'ka', 'kr', 'vp', 'cr', 'ch', 'cs', 'cs_cost', 'rs'].forEach(id => {
-          const title = document.querySelector(`#box-${id} h3`).innerText;
-          const content = document.querySelector(`.content[data-id="${id}"]`).innerText;
-          qmd += `### ${title}\n${content}\n\n`;
-        });
-        qmd += "---\n\n## SWOT 分析\n\n";
-        ['swot_s', 'swot_w', 'swot_o', 'swot_t'].forEach(id => {
-          const title = document.querySelector(`#box-${id} h3`).innerText;
-          const content = document.querySelector(`.content[data-id="${id}"]`).innerText;
-          qmd += `### ${title}\n${content}\n\n`;
-        });
-        return qmd;
-      }
-
-      function downloadLocal(type) {
-        if (type === 'qmd') {
-          const blob = new Blob([generateQMDString()], {type: "text/plain;charset=utf-8"});
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'My_Strategy.qmd';
-          a.click();
-        } else if (type === 'png') {
-          showStatus('正在生成圖檔...', true);
-          const activeTab = document.querySelector('.tabcontent[style*="block"] > div');
-          const currentTabName = activeTab.id === 'bmc-container' ? 'BMC' : 'SWOT';
-          html2canvas(activeTab).then(canvas => {
-            const a = document.createElement('a');
-            a.href = canvas.toDataURL('image/png');
-            a.download = `${currentTabName}_Analysis.png`;
-            a.click();
-            showStatus('圖檔下載完成！');
-          });
-        }
-      }
-
-      async function nativeShare() {
-        const qmdText = generateQMDString();
-        const activeTab = document.querySelector('.tabcontent[style*="block"] > div');
-        const currentTabName = activeTab.id === 'bmc-container' ? 'BMC' : 'SWOT';
-        const shareTitle = `策略分析匯出 (${currentTabName})`;
-
-        if (navigator.share) {
-          try {
-            await navigator.share({ title: shareTitle, text: qmdText });
-            showStatus('分享成功！');
-          } catch (error) {
-            showStatus('已取消分享', true);
-            setTimeout(() => document.getElementById('status').style.display = 'none', 2000);
-          }
-        } else {
-          const subject = encodeURIComponent(shareTitle);
-          const body = encodeURIComponent(qmdText);
-          window.location.href = `mailto:?subject=${subject}&body=${body}`;
-          showStatus('已開啟預設信箱軟體');
-        }
-      }
-    </script>
-  </body>
+</body>
 </html>
