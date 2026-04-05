@@ -1,13 +1,20 @@
 # 輕量級學術與營運策略畫布 (Academic BMC & SWOT Web App)
 
-A lightweight Web App for Academic Business Model Canvas and SWOT analysis using Google Sheets & GAS.
+>  A lightweight Web App for Academic Business Model Canvas and SWOT analysis using Google Sheets & GAS.
 
-這是一個利用 **Google Sheets** 作為資料庫、透過 **Google Apps Script (GAS)** 部署的輕量級網頁應用程式。專為需要頻繁調整專案策略、管理核心設施或實驗室營運的研究人員設計。
+> 這是一個利用 **Google Sheets** 作為資料庫、透過 **Google Apps Script (GAS)** 部署的輕量級網頁應用程式。專為需要頻繁調整專案策略、管理核心設施或實驗室營運的研究人員設計。  
+
+
 
 ✅ **免架設伺服器**：你的 Google 雲端硬碟就是後台。
-✅ **直覺修改**：像寫便利貼一樣，點擊網頁區塊直接編輯，自動回傳存檔。
-✅ **完全自訂標題**：支援從試算表直接更改九宮格與矩陣的中英文字段。
-✅ **學術友善匯出**：一鍵產生 Quarto (`.qmd`) 原始碼、PDF 或 PNG 圖檔。
+
+✅ **直覺修改**：像寫便利貼一樣，點擊網頁區塊直接編輯，自動回傳存檔。  
+
+✅ **完全自訂標題**：支援從試算表直接更改九宮格與矩陣的中英文字段。  
+
+
+✅ **學術友善匯出**：一鍵產生 Quarto (`.qmd`) 原始碼、PDF 或 PNG 圖檔。  
+
 
 ---
 
