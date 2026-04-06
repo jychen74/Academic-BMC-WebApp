@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic BMC & SWOT Web App</title>
+    <title>實驗室營運工具箱 (Lab Operations Toolbox)</title>
     <style>
         :root {
             --primary: #007bff;
@@ -40,6 +40,14 @@
             margin-right: 5px;
             margin-bottom: 10px;
         }
+        .feature-box {
+            background: #e3f2fd;
+            border-left: 5px solid #007bff;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .feature-box ul { margin: 10px 0 0 0; padding-left: 20px; color: #2c3e50; }
         .step-box {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
@@ -83,32 +91,52 @@
         }
         ul, ol { padding-left: 20px; }
         li { margin-bottom: 10px; }
+        .tutorial-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            margin: 15px 0 25px 0;
+            border: 1px solid #ddd;
+            display: block; 
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>輕量級學術與營運策略畫布 <br>
-            <span style="font-size: 0.55em; color: #666; font-weight: normal;">Academic BMC & SWOT Web App</span>
+        <h1>實驗室營運工具箱 <br>
+            <span style="font-size: 0.55em; color: #666; font-weight: normal;">Lab Operations Toolbox (Academic Canvas Web App)</span>
         </h1>
-        <p>這是一個利用 <strong>Google Sheets</strong> 作為資料庫、透過 <strong>Google Apps Script (GAS)</strong> 部署的輕量級網頁應用程式。專為需要頻繁調整專案策略、管理核心設施或實驗室營運的研究人員設計。</p>
+        <p>這是一個利用 <strong>Google Sheets</strong> 作為隱形資料庫、透過 <strong>Google Apps Script (GAS)</strong> 部署的輕量級網頁應用程式。專為需要頻繁調整專案策略、設計實驗架構、管理核心設施或實驗室營運的研究人員所設計。</p>
         
-        <div>
+        <div class="feature-box">
+            <strong>🌟 系統包含四大核心管理模組：</strong>
+            <ul>
+                <li><strong>策略面 (Strategic)：</strong> 商業模式畫布 (BMC) 與 SWOT 分析</li>
+                <li><strong>實驗面 (Experiment)：</strong> 實驗設計畫布 (Experiment Design Canvas, EDC)</li>
+                <li><strong>執行面 (Execution)：</strong> OKR 目標管理與艾森豪任務排程</li>
+                <li><strong>管理面 (Management)：</strong> 決策日誌、風險矩陣與專案回顧</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 15px;">
             <span class="badge">✅ 免架設伺服器</span>
-            <span class="badge">✅ 直覺修改</span>
+            <span class="badge">✅ AI 擴充友善</span>
+            <span class="badge">✅ 直覺編輯與自動存檔</span>
             <span class="badge">✅ 完全自訂標題</span>
-            <span class="badge">✅ 學術友善匯出</span>
+            <span class="badge">✅ Quarto 友善匯出 (.qmd)</span>
         </div>
 
         <h2>🚀 圖文並茂部署教學 (1 分鐘完成，保證成功)</h2>
         
         <div class="step-box">
             <h3>步驟一：建立資料庫與程式碼 (一鍵複製)</h3>
-            <p>點擊下方按鈕，將內建程式碼的資料庫範本複製到你的 Google 雲端硬碟：</p>
+            <p>點擊下方按鈕，將內建程式碼的資料庫範本複製到你的 Google 雲端硬碟 (全程免費)：</p>
             <a href="https://docs.google.com/spreadsheets/d/1ZLwbtcXO2Koy5OcWiN7oZbaF0rReSUskVKp73Zv-StE/copy" target="_blank" class="btn">📥 一鍵複製 Google Sheet 專屬範本</a>
-            <img src="figs/clone_sheet.webp" style="width: 80%; border-radius: 10%;">
-            <p style="font-size: 0.9em; margin-top: 15px; color: #555;">💡 複製完成後，你可以隨意修改試算表中 <strong>C 欄 (Title)</strong> 的標題文字，打造你專屬的畫布欄位。</p>
-            <p style="font-size: 0.9em; margin-top: 15px; color: #555;">💡 在這邊不用編輯 <strong>B欄 (content)</strong> 的內容，我們等步驟三發佈後，直接在網頁上填寫。</p>
-            <img src="figs/gsheet.webp" style="width: 80%; border-radius: 10%;">
+            <img src="figs/clone_sheet.webp" style="width: 80%; border-radius: 8px; margin-top: 15px;">
+            <p style="font-size: 0.9em; margin-top: 15px; color: #555;">💡 複製完成後，你可以隨意修改下方四個分頁 (<code>Strategic</code>, <code>Experiment</code>, <code>Execution</code>, <code>Management</code>) 中 <strong>C 欄 (Title)</strong> 的標題文字，打造你專屬的畫布欄位。</p>
+            <p style="font-size: 0.9em; margin-top: 5px; color: #d73a49; font-weight: bold;">⚠️ 請勿直接在試算表的 B 欄 (Content) 打字，我們等步驟二發佈後，直接透過精美的網頁介面來填寫！</p>
+            <img src="figs/gsheet.webp" style="width: 80%; border-radius: 8px; margin-top: 15px;">
         </div>
 
         <div class="step-box">
@@ -141,10 +169,20 @@
                 <li>🎉 恭喜！看到這個畫面代表部署成功，請複製下方產生的網址，這就是你專屬的策略畫布連結！<br>
                 <img src="figs/deploy-7.webp" alt="部署成功網址" class="tutorial-img" style="width: 50%;"></li>
 
-                <li>接下來，就可以直接在 web app 上編輯自己的 business model canvas 囉~ <br> <img src="figs/web-app.webp" alt="部署成功網址" class="tutorial-img" style="width: 50%;"></li>
+                <li>接下來，就可以直接點擊連結，在 Web App 上流暢地進行實驗室營運規劃囉！<br> 
+                <img src="figs/web-app.webp" alt="Web App 介面" class="tutorial-img" style="width: 80%;"></li>
             </ol>
         </div>
 
+        <div class="step-box" style="border-color: #ffeeba; background-color: #fff8e1;">
+            <h3 style="color: #b08d00;">⚡ 進階技巧：一鍵為資料庫瘦身加速</h3>
+            <p>為了讓網頁載入與存檔達到「秒開」等級，建議清除試算表中多餘的空白列：</p>
+            <ol style="margin-bottom: 0;">
+                <li>在 Apps Script 編輯器上方工具列，找到下拉式選單，選擇 <code>trimEmptyRows</code>。</li>
+                <li>點擊旁邊的<strong>「執行 (▶)」</strong>。</li>
+                <li>程式會自動幫你把所有分頁底部用不到的數百行空白列刪除，讓系統運作飛快！</li>
+            </ol>
+        </div>
 
         <h2>❤️ 支持這個專案</h2>
         <p>如果這個畫布工具幫助你釐清了實驗室的營運方向，或節省了你整理計畫書的時間，歡迎透過以下方式支持我的持續開發與研究：</p>
@@ -153,15 +191,16 @@
         <p>開發與維護開源工具需要投入許多業餘時間。如果你覺得工具好用，歡迎給我一點鼓勵！</p>
         <a href="https://ko-fi.com/jingyuanchen" target="_blank" class="btn sponsor-btn">☕ 贊助開發者 (Ko-fi)</a>
 
-        <h3>📄 2. 學術引用 (Citation)</h3>
-        <p>身為生醫研究人員，若你在研究或設施管理中使用了本工具，或對單細胞轉錄體 (scRNA-seq)、Nanopore 定序有興趣，歡迎一起討論。</p>
+        <h3>📄 2. 學術交流 (Academic Connection)</h3>
+        <p>身為生醫研究人員，若你在研究或設施管理中使用了本工具，或對單細胞轉錄體 (scRNA-seq)、Nanopore 定序有興趣，歡迎一起討論與交流。</p>
 
         <div class="disclaimer">
             <strong>⚠️ 免責聲明 (Disclaimer)</strong><br>
-            <p>
+            <ul>
                 <li>本專案為開發者基於個人興趣於非工作時間所開發之開源輔助工具，<strong>與所屬之研究機構或任職單位無關</strong>。</li>
-                <li>專案採「現狀 (as-is)」提供，開發者與所屬機構不承擔系統維護、資料保管或任何直接/間接損害之背書與賠償責任。使用者應自行妥善保管其匯出之資料與策略機密。</li>
-            </p>    
+                <li>專案採「現狀 (as-is)」提供，開發者與所屬機構不承擔系統維護、資料保管或任何直接/間接損害之背書與賠償責任。</li>
+                <li>使用者應自行妥善保管其匯出之資料與策略機密。</li>
+            </ul>    
         </div>
     </div>
 </body>
